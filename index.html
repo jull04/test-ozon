@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Progress Bar</title>
+    <link rel="stylesheet" href="style.css" />
+    <title>Progress bar</title>
+  </head>
+  <body>
+    <div class="app">
+      <header class="header">
+        <h1 class="header__title">Progress</h1>
+      </header>
+
+      <main class="main">
+        <section class="progress">
+          <div class="progress__container">
+            <div class="progress__block" id="progressBlock">
+              <svg class="progress__svg" viewBox="0 0 100 100">
+                <circle class="progress__bg" cx="50" cy="50" r="45" />
+                <circle class="progress__fill" cx="50" cy="50" r="45" />
+              </svg>
+            </div>
+          </div>
+        </section>
+
+        <section class="controls">
+          <div class="controls__group">
+            <input
+              type="number"
+              id="valueInput"
+              class="controls__input"
+              min="0"
+              max="100"
+              value="0"
+            />
+            <label for="valueInput" class="controls__label">Value</label>
+          </div>
+
+          <div class="controls__group">
+            <label class="toggle">
+              <input type="checkbox" id="animateToggle" class="toggle__input" />
+              <span class="toggle__slider"></span>
+            </label>
+            <label class="control__label">Animate</label>
+          </div>
+
+          <div class="controls__group">
+            <label class="toggle">
+              <input type="checkbox" id="hiddenToggle" class="toggle__input" />
+              <span class="toggle__slider"></span>
+            </label>
+
+            <label class="control__label">Hide</label>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>
