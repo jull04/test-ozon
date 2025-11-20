@@ -106,7 +106,7 @@ body {
   width: 24px;
   left: 2px;
   bottom: 2px;
-  background-color: white;
+  background-color: #fff;
   transition: 0.4s;
   border-radius: 50%;
 }
