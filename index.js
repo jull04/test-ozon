@@ -4,6 +4,8 @@ class ProgressBlock {
 
     this.settings = {
       fillSelector: options.fillSelector || ".progress__fill",
+      animatedClass: options.animatedClass || 'progress__block--animated',
+      hiddenClass: options.hiddenClass || 'progress__block--hidden',   
       ...options,
     };
 
@@ -35,9 +37,9 @@ class ProgressBlock {
     this.state.isAnimated = Boolean(state);
 
     if (this.state.isAnimated) {
-      this.element.classList.add("progress__block--animated");
+      this.element.classList.add(this.settings.animatedClass);
     } else {
-      this.element.classList.remove("progress__block--animated");
+      this.element.classList.remove(this.settings.animatedClass);
       this._updateProgress();
     }
 
@@ -48,9 +50,9 @@ class ProgressBlock {
     this.state.isHidden = Boolean(state);
 
     if (this.state.isHidden) {
-      this.element.classList.add("progress__block--hidden");
+      this.element.classList.add(this.settings.hiddenClass);
     } else {
-      this.element.classList.remove("progress__block--hidden");
+      this.element.classList.remove(this.settings.hiddenClass);
     }
 
     return this;
@@ -60,6 +62,8 @@ class ProgressBlock {
 document.addEventListener("DOMContentLoaded", function () {
   const progressBlock = new ProgressBlock("#progressBlock", {
     fillSelector: ".progress__fill",
+    animatedClass:  "progress__block--animated",
+    hiddenClass: "progress__block--hidden"  
   });
 
   const animateToggle = document.getElementById("animateToggle");
