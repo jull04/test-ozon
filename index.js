@@ -1,7 +1,14 @@
 class ProgressBlock {
-  constructor(elementId) {
-    this.element = document.getElementById(elementId);
-    this.fillElement = this.element.querySelector(".progress__fill");
+  constructor(element, options = {}) {
+    this.element = document.querySelector(element);
+
+    this.settings = {
+      fillSelector: options.fillSelector || ".progress__fill",
+      ...options,
+    };
+
+    this.fillElement = this.element.querySelector(this.settings.fillSelector);
+
     this.state = {
       value: 0,
       isAnimated: false,
@@ -9,29 +16,29 @@ class ProgressBlock {
     };
   }
 
-  setValue(value) {
-    const newValue = Math.max(0, Math.min(100, Number(value)));
-    this.state.value = newValue;
-    this.updateProgress();
-
-    return this;
-  }
-
-  updateProgress() {
+  _updateProgress() {
     if (!this.state.isAnimated) {
       const offset = 283 - (this.state.value / 100) * 283;
       this.fillElement.style.strokeDashoffset = offset;
     }
   }
 
+  setValue(value) {
+    const newValue = Math.max(0, Math.min(100, Number(value)));
+    this.state.value = newValue;
+    this._updateProgress();
+
+    return this;
+  }
+
   setAnimated(state) {
     this.state.isAnimated = Boolean(state);
 
     if (this.state.isAnimated) {
-      this.element.classList.add("animated");
+      this.element.classList.add("progress__block--animated");
     } else {
-      this.element.classList.remove("animated");
-      this.updateProgress();
+      this.element.classList.remove("progress__block--animated");
+      this._updateProgress();
     }
 
     return this;
@@ -41,9 +48,9 @@ class ProgressBlock {
     this.state.isHidden = Boolean(state);
 
     if (this.state.isHidden) {
-      this.element.classList.add("hidden");
+      this.element.classList.add("progress__block--hidden");
     } else {
-      this.element.classList.remove("hidden");
+      this.element.classList.remove("progress__block--hidden");
     }
 
     return this;
@@ -51,9 +58,14 @@ class ProgressBlock {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  const progressBlock = new ProgressBlock("progressBlock");
+  const progressBlock = new ProgressBlock("#progressBlock", {
+    fillSelector: ".progress__fill",
+  });
 
   const animateToggle = document.getElementById("animateToggle");
+  const hiddenToggle = document.getElementById("hiddenToggle");
+  const valueInput = document.getElementById("valueInput");
+
   animateToggle.addEventListener("change", function () {
     const isAnimated = this.checked;
     progressBlock.setAnimated(isAnimated);
@@ -62,7 +74,6 @@ document.addEventListener("DOMContentLoaded", function () {
     hiddenToggle.disabled = isAnimated;
   });
 
-  const hiddenToggle = document.getElementById("hiddenToggle");
   hiddenToggle.addEventListener("change", function () {
     const isHidden = this.checked;
     progressBlock.setHidden(isHidden);
