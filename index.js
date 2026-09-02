@@ -73,9 +73,6 @@ document.addEventListener("DOMContentLoaded", function () {
   animateToggle.addEventListener("change", function () {
     const isAnimated = this.checked;
     progressBlock.setAnimated(isAnimated);
-
-    valueInput.disabled = isAnimated;
-    hiddenToggle.disabled = isAnimated;
   });
 
   hiddenToggle.addEventListener("change", function () {
