@@ -172,18 +172,17 @@ body {
   stroke-dashoffset: 283;
 }
 
-.progress__block--animated .progress__fill {
-  animation: fill 6s linear infinite;
+.progress__block--animated .progress__svg {
+  animation: rotate 6s linear infinite;
 }
 
-@keyframes fill {
-  0% {
-    stroke-dasharray: 0 282;
-    stroke-dashoffset: 0;
+@keyframes rotate {
+  from {
+    transform: rotate(-90deg);
   }
-  100% {
-    stroke-dasharray: 282 0;
-    stroke-dashoffset: 0;
+
+  to {
+    transform: rotate(270deg);
   }
 }
 
